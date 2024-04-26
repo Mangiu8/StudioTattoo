@@ -1,0 +1,128 @@
+﻿@model Octopink2.Models.Artist
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto10)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,202 @@
+﻿
+
+@model  Octopink2.Models.ViewModels.StudioViewModel
+
+@using Octopink2.Models
+<main>
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1 class="hero-h1">Octopi Ink</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <div class="about-studio">
+                    <h2 class="text-center text-light mt-2 mb-2">About The Studio</h2>
+                </div>
+                <h3 class="text-center mt-2">Octopi Ink Tattoo</h3>
+                <div class="p-2 flex-container">
+                    <p class="studio-description">
+                        Benvenuti nel Dastin Tattoo Atelier, lo studio di Tattoo e Piercing a Rimini! Siamo specializzati in stili unici e creativi, tra cui il fine line, manga e cartoon. Se stai cercando un tatuaggio con linee sottili e dettagli precisi, sei nel posto giusto.
+                        Presso il nostro atelier a Rimini, mettiamo al centro la tua visione artistica. Ogni tatuaggio è un’opera d’arte personalizzata, realizzata con maestria e attenzione ai dettagli. Siamo appassionati di creare design che catturano l’essenza dei personaggi manga e cartoon, portando alla vita le tue idee e i tuoi personaggi preferiti sulla tua pelle.
+                        e tattoo, ti invitiamo a contattare il Dastin Tattoo Atelier.
+                    </p>
+                    <img src="~/Content/img/studio1.jpeg" alt="Foto dello studio" class="studio-image" />
+                    <img src="~/Content/img/studio2.jpeg" alt="Foto dello studio" class="studio-image" />
+                </div>
+            </div>
+            <h3 class="text-center mt-2">Il nostro merchandise</h3>
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="carousel-item @(product == Model.Products.First() ? "active" : "")">
+                            <a href="@Url.Action("Index", "Prodotti")">
+                                <img src="@product.Foto1" class="d-block w-100" alt="Prodotti">
+                            </a>
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="about-studio mt-2 mb-2">
+                <h2 class="text-center text-light mt-2 mb-2">Resident Artist</h2>
+            </div>
+            @{
+                bool isLeftPosition = true; // Flag per tenere traccia della posizione corrente
+            }
+            @foreach (var artist in Model.Artists)
+            {
+                if (isLeftPosition)
+                {
+
+                    <div class="artist-info-left">
+                        <h2 class="mb-0">@artist.Nome</h2>
+                        <p class="mb-0">a.k.a.</p>
+                        <h4 class="artist-name">@artist.Aka <a class="artist-social" href="@artist.InstaLink"><i class="bi bi-instagram"></i></a></h4>
+                    </div>
+                    <div class="col-md-12 mb-4 artist-details-left">
+                        <div class="artist-images-left">
+                            <img src="@artist.Foto1" alt="Foto di @artist.Nome" class="artist-image" />
+                            <img src="@artist.Foto2" alt="" class="artist-tattoo" />
+                            <img src="@artist.Foto3" alt="" class="artist-tattoo" />
+                            <img src="@artist.Foto4" alt="" class="artist-tattoo" />
+                            <img src="@artist.Foto5" alt="" class="artist-tattoo th-img" />
+                        </div>
+                        <div class="artist-description">
+                            <p>
+                                @artist.Descrizione
+                            </p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    
+                    <div class="artist-info-right">
+                        <h2 class="mb-0">@artist.Nome</h2>
+                        <p class="mb-0">a.k.a.</p>
+                        <h4 class="artist-name"><a href="@artist.InstaLink"><i class="bi bi-instagram"></i></a> @artist.Aka </h4>
+                    </div>
+                    <div class="col-md-12 artist-details-right">
+                        <div class="artist-images-right">
+                            <img src="@artist.Foto1" alt="Foto di @artist.Nome" class="artist-image" />
+                            <img src="@artist.Foto2" alt="" class="artist-tattoo" />
+                            <img src="@artist.Foto3" alt="" class="artist-tattoo" />
+                            <img src="@artist.Foto4" alt="" class="artist-tattoo th-img" />
+                            <img src="@artist.Foto5" alt="" class="artist-tattoo" />
+                        </div>
+                        <div class="artist-description">
+                            <p>
+                                @artist.Descrizione
+                            </p>
+                        </div>
+                    </div>
+                }
+                isLeftPosition = !isLeftPosition; // Cambia la posizione
+                <hr class="separator" />
+            }
+
+            @*<hr />
+                        <div class="artist-info-left">
+                            <h2 class="mb-0">Cristina Forte</h2>
+                            <p class="mb-0">a.k.a.</p>
+                            <h4 class="artist-name">CristinaforteArt <a class="artist-social" href="https://www.instagram.com/cristinaforteart/"><i class="bi bi-instagram"></i></a></h4>
+                        </div>
+                        <div class="col-md-12 mb-4 artist-details-left">
+                            <div class="artist-images-left">
+                                <img src="@artist.Foto1" alt="Foto di Cristina Forte" class="artist-image" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo th-img" />
+                            </div>
+                            <div class="artist-description">
+                                <p>
+                                    Se sei appassionata di tatuaggi realistici e cerchi una professionista capace di trasformare la tua visione in arte duratura sulla pelle, sei nel posto giusto. Sono Valeria Ink, un'esperta tatuatrice con una passione speciale per questo stile.
+                                    La mia arte si ispira alla bellezza della natura e dell'umanità, cercando di catturare emozioni e dettagli in ogni opera.
+                                    Con anni di esperienza nel settore, ho affinato la capacità di trasformare idee in tatuaggi di alta qualità e impatto visivo, mantenendo sempre un tocco di realismo senza tempo.
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="separator" />
+                        <div class="artist-info-right">
+                            <h2 class="mb-0">Francesca Pannone</h2>
+                            <p class="mb-0">a.k.a.</p>
+                            <h4 class="artist-name"><a href="https://www.instagram.com/francesca_pannone/"><i class="bi bi-instagram"></i></a> francesca Pannone </h4>
+                        </div>
+                        <div class="col-md-12 artist-details-right">
+                            <div class="artist-images-right">
+                                <img src="@artist.Foto1" alt="Foto di Francesca Pannone" class="artist-image" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo" />
+                                <img src="@artist.Foto1" alt="" class="artist-tattoo th-img" />
+                            </div>
+                            <div class="artist-description">
+                                <p>
+                                    Se cerchi una tatuatrice specializzata nell'engraving, capace di trasformare la tua pelle in un intricato capolavoro di linee incise, sei nel posto giusto. Sono Alessandra Art, un'esperta nell'arte dell'engraving.
+                                    La mia passione per questa tecnica unica si riflette nei tatuaggi che creo, noti per la precisione e le dettagliate intagliature sulla pelle.
+                                    Con anni di esperienza nel settore, ho perfezionato la capacità di trasformare idee e concetti in tatuaggi di alta qualità e impatto visivo, utilizzando l'engraving come strumento principale per esprimere creatività e stile.
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="artist-info-left">
+                            <h2 class="mb-0">Davide Cariello</h2>
+                            <p class="mb-0">a.k.a.</p>
+                            <h4 class="artist-name">
+                                davide_cariello_tattooer <a class="artist-social" href="https://www.instagram.com/davide_cariello_tattooer/"><i class="bi bi-instagram"></i></a>
+                            </h4>
+                        </div>
+                        <div class="col-md-12 mb-4 artist-details-left">
+                            <div class="artist-images-left">
+                                <img src="~/Content/img/Davide.png" alt="Foto di Davide Cariello" class="artist-image" />
+                                <img src="~/Content/img/tattooDav1.png" alt="" class="artist-tattoo" />
+                                <img src="~/Content/img/tattooDav2.png" alt="" class="artist-tattoo" />
+                                <img src="~/Content/img/tattooDav3.png" alt="" class="artist-tattoo" />
+                                <img src="~/Content/img/tattooDav4.png" alt="" class="artist-tattoo th-img" />
+                            </div>
+                            <div class="artist-description">
+                                <p>
+                                    Se sei un appassionato di stile "old school" e cerchi un tatuatore che possa portare alla vita i classici disegni e stili tradizionali, sei nel posto giusto. Sono Luca Ink, un tatuatore esperto con una passione per l'arte tattoo "old school".
+                                    La mia arte si ispira alla ricca tradizione dei tatuaggi classici, con motivi iconici come rose, teschi, ancore, e pin-up. Con anni di esperienza nel settore, ho perfezionato le tecniche che rendono questi disegni così distintivi e attraenti.
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="separator" />
+                        <div class="artist-info-right">
+                            <h2 class="mb-0">Alessandro Tufano</h2>
+                            <p class="mb-0">a.k.a.</p>
+                            <h4 class="artist-name"><a href="https://www.instagram.com/bako_body_piercing/"><i class="bi bi-instagram"></i></a> Bako</h4>
+                        </div>
+                        <div class="col-md-12 artist-details-right">
+                            <div class="artist-images-right">
+                                <img src="~/Content/img/Bako.png" alt="Foto di Alessandro Tufano" class="artist-image" />
+                                <img src="~/Content/img/piercing1.png" alt="" class="artist-tattoo" />
+                                <img src="~/Content/img/piercing2.png" alt="" class="artist-tattoo" />
+                                <img src="~/Content/img/piercing3.png" alt="" class="artist-tattoo th-img" />
+                                <img src="~/Content/img/piercing4.png" alt="" class="artist-tattoo" />
+                            </div>
+                            <div class="artist-description">
+                                <p>
+
+                                    Se cerchi una piercier esperta e appassionata, pronta a trasformare il tuo stile con piercing personalizzati e di alta qualità, sono qui per aiutarti. Sono Elena Piercing, con una passione speciale per l'arte dei piercing. La mia arte si ispira all'autoespressione attraverso il corpo;
+                                    ho dedicato anni a perfezionare le mie abilità. Offro una vasta gamma di opzioni, classiche e creative, per ottenere il look desiderato in modo sicuro e professionale.
+
+                                </p>
+                            </div>
+                </div>*@
+        </div>
+    </div>
+</main>

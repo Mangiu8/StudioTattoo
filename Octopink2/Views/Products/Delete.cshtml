@@ -1,0 +1,39 @@
+﻿@model Octopink2.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="text-center pt-2">Elimina</h2>
+
+<h3 class="text-center">Sei sicuro di voler eliminare questo prodotto?</h3>
+<h2 class="text-center">@Model.ProductName</h2>
+<div class="product-details">
+    <div id="main-image-container">
+        <img id="main-image" class="rounded-2" src="@(!string.IsNullOrEmpty(Model.Foto1) ? Url.Content(Model.Foto1) : Url.Content("~/Content/img/deafultimg.png"))" alt="Immagine Principale" />
+    </div>
+    <div id="other-images-container">
+        <div class="other-image">
+            <img class="other-image-img rounded-2" src="@(!string.IsNullOrEmpty(Model.Foto1) ? Url.Content(Model.Foto1) : Url.Content("~/Content/img/deafultimg.png"))" alt="Immagine Principale" />
+        </div>
+        <div class="other-image">
+            <img class="other-image-img rounded-2" src="@(!string.IsNullOrEmpty(Model.Foto2) ? Url.Content(Model.Foto2) : Url.Content("~/Content/img/deafultimg.png"))" alt="Immagine 2" />
+        </div>
+        <div class="other-image">
+            <img class="other-image-img rounded-2" src="@(!string.IsNullOrEmpty(Model.Foto3) ? Url.Content(Model.Foto3) : Url.Content("~/Content/img/deafultimg.png"))" alt="Immagine 3" />
+        </div>
+        <div class="other-image">
+            <img class="other-image-img rounded-2" src="@(!string.IsNullOrEmpty(Model.Foto4) ? Url.Content(Model.Foto4) : Url.Content("~/Content/img/deafultimg.png"))" alt="Immagine 4" />
+        </div>
+    </div>
+    <h3 class="product-price mt-2 mb-2">Prezzo: € @Model.Price.ToString("F2")</h3>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <input type="submit" value="Elimina" class="btn btn-danger shadow rounded-pill" />
+            @Html.ActionLink("Torna indietro", "Index", new { }, new { @class = "btn btn-secondary rounded-pill ms-2" })
+        </div>
+    }
+</div>

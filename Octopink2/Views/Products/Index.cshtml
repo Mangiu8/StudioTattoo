@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Octopink2.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+     @if (TempData["Login"] != null)
+ {
+     <text>
+ toastr.success('@TempData["Login"]');
+     </text>
+ }
+ @if (TempData["AddCart"] != null)
+ {
+     <text>
+ toastr.info('@TempData["AddCart"]');
+     </text>
+ }
+ @if (TempData["Ordine"] != null)
+ {
+     <text>
+ toastr.info('@TempData["Ordine"]');
+     </text>
+ }
+ @if (TempData["CartEmpty"] != null)
+ {
+     <text>
+    toastr.warning('@TempData["CartEmpty"]');
+     </text>
+ }
+  @if (TempData["ClearMess"] != null)
+ {
+     <text>
+         toastr.warning('@TempData["ClearMess"]');
+     </text>
+ }
+
+</script>
+<h2 class="text-center heading pt-4 mb-3">Il nostro merchandise</h2>
+
+<div class="container mb-5 pb-2">
+    <div class="d-flex justify-content-center mb-3">
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("+ Aggiungi un prodotto", "Create", null, new { @class = "btn btn-success" })
+        }
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+        @foreach (var item in Model)
+        {
+            <div class="col product-col">
+                <div class="mb-3">
+                    <div class="product-image-container ">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="mb-3">
+                                @Html.ActionLink("Modifica", "Edit", new { id = item.ProductID }, new { @class = "bi bi-pencil-square text-decoration-none btn btn-primary mx-2" })
+                                @Html.ActionLink("Elimina", "Delete", new { id = item.ProductID }, new { @class = "bi bi-x-circle text-decoration-none btn btn-danger" })
+                            </div>
+                        }
+                        <img src="@item.Foto1" alt="Prodotto" class="product-image shadow rounded-2">
+                    </div>
+                    <div class="product-info p-3">
+
+                        <div class="d-flex flex-column">
+                            <h3 class="fs-4 mb-1">@item.ProductName</h3>
+                            <h5 class="mb-2">€ @item.Price.ToString("F2")</h5>
+                        </div>
+
+                        <div>
+                            @using (Html.BeginForm("AddToCart", "Products", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@item.ProductID" />
+                                <div class="d-flex align-items-center">
+                                    <input id="Quantita" type="number" name="quantita" value="1" min="1" max="30" class="shadow form-control me-1" style="width: auto;">
+                                    @Html.ActionLink("Dettagli", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary shadow product-button rounded-pill buy-button ms-1 me-2 m-md-0" })
+                                    <input type="submit" value="Aggiungi al Carrello" class="btn btn-success shadow product-button rounded-pill buy-button">
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

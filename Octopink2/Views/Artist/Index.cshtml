@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Octopink2.Models.Artist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center pt-2">Artisti</h2>
+
+<p>
+    @Html.ActionLink("Aggiungi artista", "Create",new { }, new { @class = "btn btn-secondary rounded-3 ms-3" })
+</p>
+<table class="table center-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstaLink)
+        </th>
+        <th>Foto 1</th>
+        <th>Foto 2</th>
+        <th>Foto 3</th>
+        <th>Foto 4</th>
+        <th>Foto 5</th>
+        <th>Opzioni</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aka)
+        </td>
+        <td>
+            @{
+                string description = item.Descrizione;
+                int maxLength = 100; // Lunghezza massima della descrizione da visualizzare
+                if (description.Length > maxLength)
+                {
+                    description = description.Substring(0, maxLength) + "..."; // Tronca la descrizione se supera la lunghezza massima
+                }
+            }
+            @Html.DisplayFor(modelItem => description)
+        </td>
+        <td>
+            @{
+                string insta = item.InstaLink;
+                int maxLength2 = 25;
+                if (insta.Length > maxLength2)
+                {
+                    insta = insta.Substring(0, maxLength2) + "..."; 
+                }
+            }
+            @Html.DisplayFor(modelItem => insta)
+        </td>
+        <td><img src="@item.Foto1" style="max-width: 100px; max-height: 100px;" /></td>
+        <td><img src="@item.Foto2" style="max-width: 100px; max-height: 100px;" /></td>
+        <td><img src="@item.Foto3" style="max-width: 100px; max-height: 100px;" /></td>
+        <td><img src="@item.Foto4" style="max-width: 100px; max-height: 100px;" /></td>
+        <td><img src="@item.Foto5" style="max-width: 100px; max-height: 100px;" /></td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id = item.ArtistID }, new { @class = "btn btn-primary rounded-3 mb-1" })
+            @Html.ActionLink("Dettagli", "Details", new { id = item.ArtistID }, new { @class = "btn btn-info  rounded-3 mb-1" })
+            @Html.ActionLink("Elimina", "Delete", new { id = item.ArtistID }, new { @class = "btn btn-danger rounded-3 " })
+        </td>
+    </tr>
+}
+
+</table>
